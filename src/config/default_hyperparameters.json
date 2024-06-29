@@ -1,0 +1,6 @@
+{
+  "encode_len": 6,
+  "n_estimators":  50,
+  "max_samples":  1.0,
+  "bootstrap": true
+}
