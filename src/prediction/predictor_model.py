@@ -28,6 +28,7 @@ class TimeStepClassificatier:
     This class provides a consistent interface that can be used with other
     TimeStepClassificatier models.
     """
+
     MODEL_NAME = "Bagging_TimeStepClassificatier"
 
     def __init__(
@@ -71,7 +72,6 @@ class TimeStepClassificatier:
             n_jobs=n_jobs,
         )
         return MultiOutputClassifier(model, n_jobs=n_jobs)
-        
 
     def _get_X_and_y(
         self, data: np.ndarray, is_train: bool = True
@@ -191,14 +191,16 @@ def train_predictor_model(
     """
     model = TimeStepClassificatier(
         data_schema=data_schema,
-        padding_value=padding_value
+        padding_value=padding_value,
         **hyperparameters,
     )
     model.fit(train_data=train_data)
     return model
 
 
-def predict_with_model(model: TimeStepClassificatier, test_data: np.ndarray) -> np.ndarray:
+def predict_with_model(
+    model: TimeStepClassificatier, test_data: np.ndarray
+) -> np.ndarray:
     """
     Make forecast.
 
@@ -212,7 +214,9 @@ def predict_with_model(model: TimeStepClassificatier, test_data: np.ndarray) -> 
     return model.predict(test_data)
 
 
-def save_predictor_model(model: TimeStepClassificatier, predictor_dir_path: str) -> None:
+def save_predictor_model(
+    model: TimeStepClassificatier, predictor_dir_path: str
+) -> None:
     """
     Save the TimeStepClassificatier model to disk.
 
@@ -238,7 +242,9 @@ def load_predictor_model(predictor_dir_path: str) -> TimeStepClassificatier:
     return TimeStepClassificatier.load(predictor_dir_path)
 
 
-def evaluate_predictor_model(model: TimeStepClassificatier, test_split: np.ndarray) -> float:
+def evaluate_predictor_model(
+    model: TimeStepClassificatier, test_split: np.ndarray
+) -> float:
     """
     Evaluate the TimeStepClassificatier model and return the r-squared value.
 
